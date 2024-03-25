@@ -61,6 +61,6 @@ for (i in 1:length(projects)){   # 2){ #
 }
 
 
-i <- 10
+i <- 8
 
 
