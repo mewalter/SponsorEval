@@ -1,0 +1,43 @@
+---
+title: "SponsorEval"
+author: "Mark Walter"
+date: "2024-03-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.table.format = "html") 
+library(knitr)
+library(tidyverse)
+library(kableExtra)
+```
+
+
+```{r echo=FALSE}
+sponsor <- sponsors[i]
+project <- projects[i]
+```
+
+
+
+Dear `r sponsor`, thank you for sponsoring _`r project`_ for MAE151B this quarter. We need your sponsor evaluation by Tuesday afternoon so we can post grades on time.
+
+In addition to their final prototype, the team's final course deliverable was a design report documenting their work for the quarter AND including all relevant information you have asked for. It was due last Friday; they were told to share it with you. If you did not receive it, make sure you ask them for it.
+
+Please evaluate your team by filling out this short form: https://forms.gle/YKXqaVTQJ59TpKXaA
+
+Considering their participation, communication, contribution, creativity, etc., please evaluate and rate each student by placing an 'X" in your reply e-mail for each row of the following table:
+
+```{r echo=FALSE}
+evaltable %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+
+Thank you again, and please let us know if you have any questions. 
+
+regards, mark
+
+
