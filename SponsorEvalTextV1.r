@@ -7,10 +7,16 @@ library("rstudioapi")
 library("jsonlite")
 library("knitr")
 library("rmarkdown")
+library("kableExtra")
 
+
+############# This is a cool way to get team data, but canvas names can (AND DO) change, so it might be better to just keep 
+############# passing around the GroupsWithNames.csv file
+
+######### NOTE: if there is MORE than ONE group category, call4groups is a vector ... pick the right one! ##################
 
 # set the Canvas Class ID
-class_id <- "61600"
+class_id <- "63712"       ## MAE151B_Sp24
 
 # set some strings for the fromJSON calls
 token <- "4407~cV0DPpTSmVsjyrYteGHINIXvE76TD7RTy750ASCHFUfj6yqMONUXOqlgWsoPkIXt" #Authorization token. Set this up in your Canvas profile
@@ -26,7 +32,8 @@ categorydata <- fromJSON(call4cats)
 
 #now find all the ids and names of each group/team in each category    ############## ONLY ONE Category!!! ##########
 call4groups <- paste0(canvas_base,"group_categories/",categorydata$id,groups_call)
-groupdata <- fromJSON(call4groups)
+# groupdata <- fromJSON(call4groups)
+groupdata <- fromJSON(call4groups[2])              # calling the 2nd element of the vector here!!!!
 group_info <- tibble(GroupID=groupdata$id,GroupName=groupdata$name,MemberCnt=groupdata$members_count) %>% 
   filter(MemberCnt>0)    # drop any groups that have zero members
 
@@ -45,8 +52,10 @@ write.csv(teamdata, file = "GroupsWithNames.csv",row.names=FALSE)
 
 # Data
 projects <- unique(teamdata$ProjectName)
-sponsors <- c("Karen and Bobby","Karen and Bobby","Amir","Jacquie",
-              "John","Mike","Natasha","Mohammed","Yun","Xian","Camilo","Sasha","Ramin","David")
+sponsors <- c("Aaron","Perry","Derek and Moses","Mike",
+              "Vince","Camilo","Tryphon","Andrei","Tyler","David","Xian","Amir","Mark",
+              "Sherif","Sherif","David","Mike", "Joyce and Camilo",
+              "Nicholas and Tryphon","Nicholas and Tryphon","Andrei")
 
 ## Loop
 for (i in 1:length(projects)){   # 2){ # 
